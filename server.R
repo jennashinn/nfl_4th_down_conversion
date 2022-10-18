@@ -75,7 +75,7 @@ shinyServer(function(session, input, output) {
     
     output$picture4th <-
       renderText({
-        c('<img width="75" src="',
+        c('<img width="100" src="',
           glue("{teams %>%
                    filter(team_abbr == input$posteam) %>%
                    pull(team_logo_espn)}"),
@@ -83,14 +83,20 @@ shinyServer(function(session, input, output) {
       })
 
     # Print decisions
-    output$some_text <- renderText({
-    return(glue::glue("<font size='+2'><span style='color:red'>{tableData() %>% 
-    arrange(-choice_prob) %>% dplyr::slice(1) %>% pull(choice)}</span> (+
-      <span style='color:green'> <strong> 
-                      {round(tableData() %>% arrange(-choice_prob) %>% dplyr::slice(1) %>% 
-                      pull(choice_prob) - tableData() %>% arrange(-choice_prob) %>% 
-                      dplyr::slice(2) %>% pull(choice_prob), 1)}% WP</strong></span>)</font>"))
-      })
+    output$some_text4th <- renderText({
+    return(glue("<font size='+1'> The Offense Should : <br>
+    <font size='+1'><span style='color:red'> <strong>
+    {tableData4th() %>% 
+    arrange(-choice_prob) %>% 
+    slice(1) %>% 
+    pull(choice)}</span> 
+    (+ <span style='color:green'> <strong>
+    {round(tableData4th() %>%
+    arrange(-choice_prob) %>% 
+    slice(1) %>%
+    pull(choice_prob) - tableData4th() %>% arrange(-choice_prob) %>%
+              slice(2) %>% pull(choice_prob), 1)}% WP</strong></span>)</font>"))
+  })
 
     
     

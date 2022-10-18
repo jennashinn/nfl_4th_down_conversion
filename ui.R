@@ -24,7 +24,7 @@ shinyUI(
             column(12, 
               fluidRow(
                 ## GAME INPUTS ----
-                column(4, strong(h4("Game Details:")),
+                column(3, strong(h4("Game Details:")),
                   fluidRow(
                     column(6,
                            selectInput(inputId =  "season", label = "Season:", choices = 2014:2022, selected = 2020)),
@@ -51,7 +51,7 @@ shinyUI(
                           width = "100%")),
                 
                 ## TIME INPUTS ----
-                column(4, strong(h4("Time Details:")),
+                column(3, offset= 1,  strong(h4("Time Details:")),
                   radioButtons("qtr",label = "Quarter:", choices = 1:4, 
                                inline = T, 
                                selected = 4, 
@@ -76,7 +76,7 @@ shinyUI(
                 ),
                 
                 ## SITUATIONAL INPUTS ----
-                column(4, strong(h4("Situtional Details:")), 
+                column(4, offset =1 , strong(h4("Situtional Details:")), 
                        sliderInput(inputId =  "ydstogo", label = "Yards to go:", min = 1, max = 30,
                            value = 1, 
                            width = "100%"),
@@ -85,11 +85,7 @@ shinyUI(
                            width = "100%"),
                        sliderInput(inputId =  "score_diff", label = "Score differential:", min = -28, max = 28,
                            value = -1, 
-                           width = "100%"),
-                       # sliderInput(inputId =  "runoff", label = "Additional seconds to run off clock after successful conversion:",
-                       #     min = 0, max = 40,
-                       #     value = 0,
-                       #     width = "100%"))
+                           width = "100%")
                 )
               )
           )
@@ -116,6 +112,12 @@ shinyUI(
             #### FOURTH DOWN CONVERSION ####
             tabPanel(
               "4th Down", 
+              # fluidRow(
+              #   column(12, align = "center", 
+              #          htmlOutput("picture_off"), 
+              #          htmlOutput("picture_def")
+              # )
+              # ),
               fluidRow(
                 column(12, align = "center",
                        tags$br(),
@@ -123,6 +125,9 @@ shinyUI(
                        htmlOutput("picture4th"), 
                        htmlOutput("some_text4th"))
                 ),
+              
+              tags$hr(), 
+              
               fluidRow(
                 column(12, align="center",
                        gt_output(outputId = "view4th") %>%
